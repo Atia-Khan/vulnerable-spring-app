@@ -54,29 +54,29 @@ public class AuthController {
     JwtUtils jwtUtils;
 
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
+    // @PostMapping("/signup")
+    // public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    //     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+    //         return ResponseEntity
+    //                 .badRequest()
+    //                 .body(new MessageResponse("Error: Username is already taken!"));
+    //     }
     
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
-        }
+    //     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+    //         return ResponseEntity
+    //                 .badRequest()
+    //                 .body(new MessageResponse("Error: Email is already in use!"));
+    //     }
     
-        // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                passwordEncoder.encode(signUpRequest.getPassword())); // Hash the password
+    //     // Create new user's account
+    //     User user = new User(signUpRequest.getUsername(),
+    //             signUpRequest.getEmail(),
+    //             passwordEncoder.encode(signUpRequest.getPassword())); // Hash the password
     
-        userRepository.save(user);
+    //     userRepository.save(user);
     
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-    }
+    //     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    // }
     
 
 
@@ -128,29 +128,50 @@ public class AuthController {
 
 
 
-//     @PostMapping("/signup")
-//     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-//         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-//             return ResponseEntity
-//                     .badRequest()
-//                     .body(new MessageResponse("Error: Username is already taken!"));
-//         }
+    // @PostMapping("/signup")
+    // public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    //     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+    //         return ResponseEntity
+    //                 .badRequest()
+    //                 .body(new MessageResponse("Error: Username is already taken!"));
+    //     }
 
-//         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//             return ResponseEntity
-//                     .badRequest()
-//                     .body(new MessageResponse("Error: Email is already in use!"));
-//         }
+    //     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+    //         return ResponseEntity
+    //                 .badRequest()
+    //                 .body(new MessageResponse("Error: Email is already in use!"));
+    //     }
 
-//         // Create new user's account
-//         User user = new User(signUpRequest.getUsername(),
-//                 signUpRequest.getEmail(),
-//                 encoder.encode(signUpRequest.getPassword()));
+    //     // Create new user's account
+    //     User user = new User(signUpRequest.getUsername(),
+    //             signUpRequest.getEmail(),
+    //             encoder.encode(signUpRequest.getPassword()));
 
 
-//         userRepository.save(user);
+    //     userRepository.save(user);
 
-//         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-//     }
-// }
+    //     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    // }
+
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+        }
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
+        }
+        User user = new User(
+                signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword())
+        );
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
 }
