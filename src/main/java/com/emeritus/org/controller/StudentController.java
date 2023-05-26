@@ -28,6 +28,11 @@ public class StudentController {
 	public String getRegister(Model model){
 		return "register";
 	}
+
+
+
+
+	
 	// handler method to handle list students and return mode and view
 	@GetMapping("/students")
 	public String listStudents(Model model) {

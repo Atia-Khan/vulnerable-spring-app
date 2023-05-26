@@ -42,7 +42,7 @@
 							name = "firstName"
 							th:field = "*{firstName}"
 							class = "form-control"
-							placeholder="Enter Student First Name" 
+							placeholder="Enter Student First Name" pattern="[a-zA-Z0-9]{4,20}" title="Username must be alphanumeric and 4-20 characters long" required
 							/>
 						</div>
 						
@@ -54,6 +54,7 @@
 							th:field = "*{lastName}"
 							class = "form-control"
 							placeholder="Enter Student Last Name" 
+							pattern="[a-zA-Z0-9]{4,20}" title="Username must be alphanumeric and 4-20 characters long" required
 							/>
 						</div>
 						
