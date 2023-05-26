@@ -1,6 +1,7 @@
 package com.emeritus.org.service;
 
 import java.util.List;
+import java.util.concurrent.atomic.LongAccumulator;
 
 import com.emeritus.org.entity.Student;
 
@@ -14,7 +15,7 @@ public interface StudentService {
 	
 	Student saveStudent(Student student);
 	
-	Student getStudentById(String id);
+	Student getStudentById(Long id);
 	
 	Student updateStudent(Student student);
 	
