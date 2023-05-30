@@ -63,7 +63,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // .logout();
         
 
-        http.cors().and().csrf().disable()
+        http.cors().and().csrf().and()
+                .authorizeRequests().antMatchers( "/","/auth/signin").permitAll()
+                .anyRequest().authenticated().and()
+                .formLogin()
+                    .loginPage("/")
+                    .loginProcessingUrl("/")
+                    .defaultSuccessUrl("/students/new", true)
+                    .successForwardUrl("/students/new")
+                    .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
